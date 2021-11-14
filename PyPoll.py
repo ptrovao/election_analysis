@@ -51,6 +51,20 @@ with open(file_to_load) as election_data:
         # Add a vote to the candidate's count
         candidate_votes[candidate_name] += 1
 
+# Save the results to our text file
+with open(file_to_save, "w") as txt_file:
+
+# Print the final vote count to the terminal
+    election_results = (
+        f"\nElection Results\n"
+        f"-----------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-----------------------------\n")
+    print(election_results, end="")
+
+    # Save the final vote count to the text file
+    txt_file.write(election_results)
+
     # Determine the percentage of votes for each candidate through the counts
     #1. Iterate through candidate list
     for candidate_name in candidate_votes:
@@ -62,7 +76,11 @@ with open(file_to_load) as election_data:
         vote_percentage = float(votes) / float(total_votes) * 100
 
         # Print out each candidate's name, vote count and percentage of votes
-        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        candidate_results = (f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        print (candidate_results)
+
+        # Save candidate results to our text file
+        txt_file.write(candidate_results)
 
         # Determine winning vote count and candidate 
         # Determine if the votes is greater than the winning count
@@ -80,12 +98,8 @@ with open(file_to_load) as election_data:
 
     print(winning_candidate_summary)
 
-        #4. Print candidate name and percentage of votes
-        #print(f"{candidate_name}: received {vote_percentage:.2f}% of the votes")
-
-# Print candidate vote dictionary
-#print(candidate_votes)
-
+    # Save the winning candidate's results to the text file
+    txt_file.write(winning_candidate_summary)
 
 # import csv
 # import os
